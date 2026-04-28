@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda de Cocina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#" class="logo">Tienda de Cocina</a>
+      </div>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#">Inicio</a>
+        <a href="#productos">Platos</a>
+        <a href="#productos">Tazas</a>
+        <a href="#productos">Vasos</a>
+      </nav>
+      <div class="actions">
+        <button id="cart-button" class="cart-btn" aria-label="Abrir carrito" aria-haspopup="dialog" aria-controls="cart-modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="20" r="1" fill="currentColor"/>
+            <circle cx="18" cy="20" r="1" fill="currentColor"/>
+          </svg>
+          <span id="cart-count" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Elegancia para tu mesa</h1>
+        <p>Platos, tazas y vasos con diseño pensado para cada momento.</p>
+        <a href="#productos" class="btn-primary">Ver colección</a>
+      </div>
+      <div class="hero-image">
+        <img src="images/hero.jpg" alt="Mesa con platos y tazas">
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="productos" class="productos-grid" aria-label="Lista de productos">
+      <article class="card producto" data-id="plato" data-name="Plato elegante" data-price="1.00">
+        <div class="card-media">
+          <img src="images/plato.jpg" alt="Plato elegante">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Plato elegante</h3>
+          <p class="product-price">$1.00</p>
+          <button class="btn-outline add-to-cart">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="card producto" data-id="taza" data-name="Taza moderna" data-price="1.00">
+        <div class="card-media">
+          <img src="images/taza.jpg" alt="Taza moderna">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Taza moderna</h3>
+          <p class="product-price">$1.00</p>
+          <button class="btn-outline add-to-cart">Agregar al carrito</button>
+        </div>
+      </article>
+
+      <article class="card producto" data-id="vaso" data-name="Vaso de vidrio" data-price="1.00">
+        <div class="card-media">
+          <img src="images/vaso.jpg" alt="Vaso de vidrio">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Vaso de vidrio</h3>
+          <p class="product-price">$1.00</p>
+          <button class="btn-outline add-to-cart">Agregar al carrito</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Tienda de Cocina. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante para crear combos -->
+  <button id="open-combo" class="floating-combo" aria-label="Crear combo" aria-haspopup="dialog" aria-controls="combo-modal">Crear combo</button>
+
+  <!-- Modal Crear Combo (flotante) -->
+  <div id="combo-modal" class="combo-modal hidden" role="dialog" aria-modal="true" aria-labelledby="combo-title">
+    <div class="combo-panel" role="document">
+      <header class="combo-header">
+        <h3 id="combo-title">Crear tu combo — $2.75</h3>
+        <button id="close-combo" class="close-btn" aria-label="Cerrar combo">&times;</button>
+      </header>
+      <div class="combo-body">
+        <p>Selecciona hasta <strong id="combo-max-count-text">3</strong> productos.</p>
+        <div id="combo-options" class="combo-options" aria-label="Opciones de combo"></div>
+
+        <div class="combo-footer">
+          <div class="combo-counter" aria-live="polite">
+            <strong id="combo-selected-count">0</strong><span>/</span><span id="combo-max-count">3</span> seleccionados
+          </div>
+
+          <div class="combo-actions">
+            <label for="combo-qty">Cantidad</label>
+            <input id="combo-qty" type="number" min="1" value="1" aria-label="Cantidad de combos" />
+            <button id="add-combo" class="btn-primary full" type="button">Agregar combo ($2.75)</button>
+          </div>
+        </div>
+
+        <p class="note small">El combo se añadirá al carrito con precio fijo de $2.75.</p>
+      </div>
+    </div>
+    <div class="combo-backdrop" id="combo-backdrop" tabindex="-1"></div>
+  </div>
+
+  <!-- Modal Carrito -->
+  <div id="cart-modal" class="cart-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-panel" role="document">
+      <header class="cart-header">
+        <h2 id="cart-title">Tu carrito</h2>
+        <button id="close-cart" class="close-btn" aria-label="Cerrar carrito">&times;</button>
+      </header>
+      <div class="cart-content">
+        <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong>$<span id="cart-subtotal">0.00</span></strong>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <strong>$<span id="cart-total">0.00</span></strong>
+          </div>
+        </div>
+
+        <!-- Transferencia -->
+        <div class="transfer-payment">
+          <h3>Pagar por transferencia bancaria</h3>
+          <ul class="bank-details">
+            <li><strong>Banco:</strong> Banco Pichincha</li>
+            <li><strong>Cuenta:</strong> <span id="bank-account">TU_NUMERO_CUENTA</span></li>
+            <li><strong>Titular:</strong> <span id="bank-holder">NOMBRE_TITULAR</span></li>
+            <li><strong>Tipo de cuenta:</strong> <span id="bank-type">TIPO_CUENTA</span></li>
+          </ul>
+
+          <form id="transfer-form" class="cod-form transfer-form" onsubmit="return false;">
+            <label for="transfer-name">Nombre completo</label>
+            <input id="transfer-name" type="text" placeholder="Tu nombre" required>
+
+            <label for="transfer-address">Dirección</label>
+            <textarea id="transfer-address" rows="2" placeholder="Calle, número, referencia" required></textarea>
+
+            <div class="cod-actions transfer-actions">
+              <button id="confirm-transfer" class="btn-primary full" type="button">Enviar comprobante de pago</button>
+              <button id="cancel-transfer" class="btn-outline full" type="button">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Pago en efectivo al recibir -->
+        <div class="cod-section">
+          <h3>Pagar en efectivo al recibir</h3>
+          <form id="cod-form" class="cod-form" onsubmit="return false;">
+            <label for="guest-name">Nombre completo</label>
+            <input id="guest-name" type="text" placeholder="Tu nombre" required>
+
+            <label for="guest-address">Dirección de entrega</label>
+            <textarea id="guest-address" rows="2" placeholder="Calle, número, referencia" required></textarea>
+
+            <label for="delivery-type">Tipo de entrega</label>
+            <select id="delivery-type">
+              <option value="Domicilio">Domicilio</option>
+              <option value="Recoger">Recoger en punto</option>
+            </select>
+
+            <div class="cod-actions">
+              <button id="confirm-cod" class="btn-primary full" type="button">Pagar en efectivo al recibir</button>
+              <button id="cancel-cod" class="btn-outline full" type="button">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <div class="cart-backdrop" id="cart-backdrop" tabindex="-1"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
